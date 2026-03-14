@@ -1,0 +1,94 @@
+Invoice Generator - Context & Setup Resources
+
+================================================================
+
+Project: Invoice Generator
+Description: A clean, modern invoice generator with split-screen
+             form + live preview, matching the design of cryptoinvoice.new
+             (without the crypto part).
+
+Stack: Next.js 15 + TypeScript + Tailwind + Shadcn UI + @react-pdf/renderer
+Future: Supabase (save invoices/clients) + Resend (email invoices) + Agent/API integration
+
+================================================================
+
+1. Stack_Analysis.md
+General stack comparison and rationale (from AI Builder Stack 2025)
+
+================================================================
+
+2. PROPOSED_STACK_SETUP.md (1, Proposed_Stack_Setup.md):
+Invoice-specific setup guide covering:
+
+1. Step-by-step manual setup
+2. Dependencies (including @react-pdf/renderer)
+3. Shadcn UI components needed for invoice form
+4. Folder structure for invoice app
+5. Environment variables (minimal - no Stripe/Postman needed)
+6. PDF generation setup
+
+================================================================
+
+3A. Setup_AI_Builder_Stack_npm.sh [npm version]
+3B. Setup_AI_Builder_Stack_pnpm.sh [pnpm - RECOMMENDED]
+3C. Setup_AI_Builder_Stack.sh (Original backup)
+
+Automated setup scripts adapted for the invoice generator:
+- Removes: Stripe, Postman, AI SDK (not needed for MVP)
+- Adds: @react-pdf/renderer, date-fns
+- Keeps: Next.js 15, TypeScript, Tailwind, Shadcn UI, Supabase (for later)
+
+================================================================
+
+4. QUICK_REFERENCE.md
+Simplified quick reference for the invoice project
+
+================================================================
+
+Key Differences from General Boilerplate:
+- No Stripe (not a payment tool, it generates invoices)
+- No Postman (no complex API testing needed for MVP)
+- No Vercel AI SDK (added later for agent integration)
+- Added @react-pdf/renderer (core PDF generation)
+- Folder structure tailored for invoice components
+
+================================================================
+
+How to Use:
+
+# 1. Run setup script
+bash Setup_AI_Builder_Stack_pnpm.sh invoice-generator
+
+# 2. Navigate to project
+cd invoice-generator
+
+# 3. Start development
+pnpm dev
+
+# 4. Build the invoice UI (form + preview + PDF export)
+
+================================================================
+
+Invoice App Architecture:
+
+app/
+  page.tsx                    # Main invoice page (split-screen layout)
+  api/invoices/              # API routes (for future agent integration)
+components/
+  invoice/
+    invoice-form.tsx          # Left panel - stepped form
+    invoice-preview.tsx       # Right panel - live preview
+    invoice-pdf.tsx           # PDF template (react-pdf)
+    company-step.tsx          # Step 1: Your company
+    client-step.tsx           # Step 2: Your client
+    items-step.tsx            # Step 3: Line items
+    payment-step.tsx          # Step 4: Payment details
+lib/
+  invoice/
+    types.ts                  # Invoice TypeScript types
+    defaults.ts               # Default values
+    calculations.ts           # Subtotal, tax, total logic
+    pdf-generator.ts          # PDF generation utility
+  supabase/                   # (Future) Save/load invoices
+
+================================================================
